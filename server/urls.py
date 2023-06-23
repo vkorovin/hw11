@@ -15,36 +15,42 @@ from django.contrib.admindocs import urls as admindocs_urls
 from django.urls import include, path
 from django.views.generic import TemplateView
 from health_check import urls as health_urls
+from server.apps.mytodo import urls as mytodo_urls
+from server.apps.mytodo.views import index
 
-from server.apps.main import urls as main_urls
-from server.apps.main.views import index
+#from server.apps.main import urls as main_urls
+#from server.apps.main.views import index
 
 admin.autodiscover()
-
 urlpatterns = [
-    # Apps:
-    path('main/', include(main_urls, namespace='main')),
-
-    # Health checks:
-    path('health/', include(health_urls)),
-
-    # django-admin:
-    path('admin/doc/', include(admindocs_urls)),
-    path('admin/', admin.site.urls),
-
-    # Text and xml static files:
-    path('robots.txt', TemplateView.as_view(
-        template_name='txt/robots.txt',
-        content_type='text/plain',
-    )),
-    path('humans.txt', TemplateView.as_view(
-        template_name='txt/humans.txt',
-        content_type='text/plain',
-    )),
-
-    # It is a good practice to have explicit index view:
+    path('mytodo/', include(mytodo_urls, namespace='mytodo')),
     path('', index, name='index'),
 ]
+
+#urlpatterns_old = [
+#    # Apps:
+#    path('main/', include(main_urls, namespace='main')),
+#
+#    # Health checks:
+#    path('health/', include(health_urls)),
+#
+#    # django-admin:
+#    path('admin/doc/', include(admindocs_urls)),
+#    path('admin/', admin.site.urls),
+#
+#    # Text and xml static files:
+#    path('robots.txt', TemplateView.as_view(
+#        template_name='txt/robots.txt',
+#        content_type='text/plain',
+#    )),
+#    path('humans.txt', TemplateView.as_view(
+#        template_name='txt/humans.txt',
+#        content_type='text/plain',
+#    )),
+
+#    # It is a good practice to have explicit index view:
+#    path('', index, name='index'),
+#]
 
 if settings.DEBUG:  # pragma: no cover
     import debug_toolbar  # noqa: WPS433

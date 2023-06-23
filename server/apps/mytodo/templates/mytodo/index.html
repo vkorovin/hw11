@@ -1,0 +1,39 @@
+<html class="no-js" lang="en">
+  <head>
+    <title>MyToDo eine kleine dummkopf App</title>
+  </head>
+<body>
+    <div>
+      <h1>MyToDo</h1>
+
+      {% for todo in todos %}
+        <p>
+          {{ todo.title }}: {{ todo.description }}
+        </p>
+        <hr>
+      {% empty %}
+      No todo records yet!
+      {% endfor %}
+    </div>
+<div>
+      <h2>Create new todo record</h2>
+
+      {% if messages %}
+      <ul>
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+
+      <form method="POST" action="{% url 'mytodo:create' %}">
+        {% csrf_token %}
+
+        <input type="text" placeholder="title" name="title">
+        <input type="text" placeholder="description" name="description">
+
+        <input type="submit" value="Save">
+      </form>
+    </div>
+  </body>
+</html>
