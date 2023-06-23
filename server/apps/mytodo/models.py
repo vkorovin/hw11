@@ -14,6 +14,8 @@ class MyToDo(models.Model):
         upadated_at - date/time of record update
 
     """
+
+    id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=_MYTODO_TITLE_MAX_LENGTH)
     description = models.TextField()
 

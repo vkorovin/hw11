@@ -1,0 +1,15 @@
+<h1>Update MyToDo record </h1>
+
+<form method="POST" action="{% url 'mytodo:update' todo.id  %}">
+{% csrf_token %}
+Title: <input name="title" value="{{ todo.title }}">
+<br><br>
+Description: <input name="description" value="{{ todo.description }}">
+<br><br>
+<label>
+Is_done
+  <input type="checkbox" name="is_done" value="{{ todo.is_done }}">
+</label>
+<br><br>
+<input type="submit" value="Save">
+</form>

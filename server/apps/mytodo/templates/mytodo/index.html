@@ -1,19 +1,31 @@
 <html class="no-js" lang="en">
   <head>
-    <title>MyToDo eine kleine dummkopf App</title>
+    <title>MyToDo: eine kleine dummkopf App</title>
   </head>
 <body>
     <div>
       <h1>MyToDo</h1>
-
+    <table width="100%" border="1" cellpadding="4" cellspacing="0">
+      <tr align="left">
+      <th>Title</th>
+      <th>Description</th>
+      <th>Done</th>
+      <th>Created</th>
+      <th>Action</th>
+      </tr>
       {% for todo in todos %}
-        <p>
-          {{ todo.title }}: {{ todo.description }}
-        </p>
-        <hr>
+         <tr>
+           <td width="20%">{{ todo.title }}</td>
+           <td>{{ todo.description }}</td>
+           <td>{{ todo.is_done }}</td>
+           <td width="15%">{{ todo.created_at }}</td>
+           <td> <a href="../../mytodo/update/{{ todo.id }}">Edit</a>      <a href="../../mytodo/delete/{{ todo.id }}">Delete</a></td>
+         </tr>
+
       {% empty %}
       No todo records yet!
       {% endfor %}
+      </table>
     </div>
 <div>
       <h2>Create new todo record</h2>
