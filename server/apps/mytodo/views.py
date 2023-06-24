@@ -33,6 +33,8 @@ def create(request: HttpRequest) -> HttpResponse:
     messages.info(request, 'Todo record created: {0}'.format(is_created))
     return redirect(index)
 
+
+@require_http_methods(["GET", "POST"])
 def update(request: HttpRequest,id)-> HttpResponse:
     if request.method == 'GET':
         todo = MyToDo.objects.get(id=id)
@@ -46,8 +48,16 @@ def update(request: HttpRequest,id)-> HttpResponse:
         is_done=bool(request.POST.get('is_done')),
         )
         return redirect(index)
+
+
 @require_http_methods(['GET'])
 def delete(request: HttpRequest,id)-> HttpResponse:
     delete_todo.run(id)
     todos = todo_queries.list_notdeleted()
     return redirect(index)
+
+
+@require_http_methods(['GET'])
+def view(request: HttpRequest,id)-> HttpResponse:
+    todo = MyToDo.objects.get(id=id)
+    return render(request, 'mytodo/view.html', {'todo': todo})

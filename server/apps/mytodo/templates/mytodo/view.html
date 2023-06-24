@@ -1,0 +1,19 @@
+<html class="no-js" lang="en">
+  <head>
+    <title>MyToDo: eine kleine dummkopf App</title>
+  </head>
+  <body>
+  {% csrf_token %}
+  <h1>View MyToDo record ID: {{todo.id }} </h1>
+  Title: {{ todo.title }} <br>
+  Description: {{ todo.title }}<br>
+  Is_done: {{ todo.is_done }}<br>
+  Created: {{ todo.created_at }}<br>
+  Updated: {{ todo.updated_at }}<br><br>
+
+  <a href="../../mytodo/update/{{ todo.id }}">Edit</a>
+  <a href="../../mytodo/delete/{{ todo.id }}">Delete</a>
+  <a href="../../mytodo">Exit</a>
+
+  </body>
+</html>
